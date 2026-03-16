@@ -26,7 +26,7 @@ import { toaster } from '../components/ui/toaster';
 
 interface ProfileData {
   id: string;
-  emailL: string;
+  email: string;
   role: string;
   created_at: string;
 }
@@ -226,6 +226,7 @@ export default function Admin() {
                 <Table.Root size="sm">
                   <Table.Header>
                     <Table.Row>
+                      <Table.ColumnHeader>Email</Table.ColumnHeader>
                       <Table.ColumnHeader>User ID</Table.ColumnHeader>
                       <Table.ColumnHeader>Role</Table.ColumnHeader>
                       <Table.ColumnHeader textAlign="right">Actions</Table.ColumnHeader>
@@ -235,6 +236,9 @@ export default function Admin() {
                     {profiles.map((profile) => (
                       <Table.Row key={profile.id}>
                         <Table.Cell>
+                          <Text fontWeight="medium" fontSize="sm">{profile.email || "No email"}</Text>
+                        </Table.Cell>
+                        <Table.Cell>
                           <Text truncate maxW="150px" fontSize="xs" fontFamily="monospace">{profile.id}</Text>
                         </Table.Cell>
                         <Table.Cell>
@@ -242,7 +246,7 @@ export default function Admin() {
                             {profile.role}
                           </Badge>
                         </Table.Cell>
-                        <Table.Cell textAlign="right">
+                        <Table.Cell>
                           <NativeSelect.Root size="sm" width="fit-content" ml="auto">
                             <NativeSelect.Field
                               value={profile.role}

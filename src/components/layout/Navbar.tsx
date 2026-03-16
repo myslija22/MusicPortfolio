@@ -10,7 +10,7 @@ const NavLink = ({ href, children }: { href: string; children: React.ReactNode }
     const isActive = pathname === href
 
     return (    //gemini.google.com
-        <ChakraLink asChild _currentPage={{ color: "blue.500", fontWeight: "bold" }}> 
+        <ChakraLink asChild _currentPage={{ color: "blue.500", fontWeight: "bold" }}>
             <RouterLink
                 to={href}
                 aria-current={isActive ? "page" : undefined}
@@ -28,12 +28,12 @@ export default function Navbar() {
 
     const handleLogout = async () => {
         const { error } = await supabase.auth.signOut();
-        
+
         if (error) {
             console.error("Error during sign out:", error.message);
-            localStorage.clear(); 
+            localStorage.clear();
             sessionStorage.clear();
-        }else {
+        } else {
             console.log("Signed out successfully!");
             toaster.create({
                 title: "Signed out successfully!",
@@ -41,7 +41,7 @@ export default function Navbar() {
                 type: "success",
             });
         }
-        
+
         navigate("/login");
     }
 
@@ -52,7 +52,7 @@ export default function Navbar() {
 
             {user && (role === "admin" || role === "vip") && <NavLink href="/exclusive">VIP</NavLink>}
             {user && role === "admin" && <NavLink href="/admin">Dashboard</NavLink>}
-            
+
             {!user ? (
                 <>
                     <NavLink href="/login">Login</NavLink>

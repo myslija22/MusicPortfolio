@@ -10,10 +10,10 @@ interface ProtectedRouteProps {
   children?: React.ReactNode;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ 
-  redirectPath = '/login', 
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
+  redirectPath = '/login',
   allowedRoles,
-  children 
+  children
 }) => {
   const { user, role, loading } = useAuth();
   const location = useLocation();

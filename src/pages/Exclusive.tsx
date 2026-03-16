@@ -8,7 +8,7 @@ const Exclusive: React.FC = () => {
       <Heading mb={8} textAlign="center">
         Exclusive Demos
       </Heading>
-      
+
       <Tracks isExclusive={true} />
     </Box>
   );

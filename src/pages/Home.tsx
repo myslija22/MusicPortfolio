@@ -1,10 +1,10 @@
-import { 
-    Box, 
-    Container, 
-    Heading, 
-    Text, 
-    VStack, 
-    Link 
+import {
+    Box,
+    Container,
+    Heading,
+    Text,
+    VStack,
+    Link
 } from '@chakra-ui/react';
 
 import Track from '@/components/audio/Track';

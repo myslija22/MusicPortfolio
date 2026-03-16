@@ -7,8 +7,8 @@ interface TrackData {
     id: string | number;
     title: string;
     file_path: string;
-    artist?: string; 
-    created_at?: string; 
+    artist?: string;
+    created_at?: string;
 }
 
 const Track: React.FC = () => {
@@ -19,7 +19,7 @@ const Track: React.FC = () => {
     useEffect(() => {
         const fetchLatestTrack = async () => {
             setLoading(true);
-            
+
             const { data, error } = await supabase
                 .from('tracks')
                 .select('*')
@@ -33,7 +33,7 @@ const Track: React.FC = () => {
             } else if (data) {
                 setLatestTrack(data);
             }
-            
+
             setLoading(false);
         };
 
@@ -42,7 +42,7 @@ const Track: React.FC = () => {
 
     const handlePlay = () => {
         if (!latestTrack) return;
-        
+
         const { data } = supabase.storage
             .from('audio_files')
             .getPublicUrl(latestTrack.file_path);
@@ -50,7 +50,7 @@ const Track: React.FC = () => {
         if (data?.publicUrl) {
             playTrack({
                 src: data.publicUrl,
-                title: latestTrack.title, 
+                title: latestTrack.title,
             });
         }
     };
@@ -64,13 +64,13 @@ const Track: React.FC = () => {
     }
 
     return (
-        <Box 
-            p={6} 
-            borderWidth="1px" 
-            borderRadius="xl" 
+        <Box
+            p={6}
+            borderWidth="1px"
+            borderRadius="xl"
             display="flex"
             flexDirection="column"
-            justifyContent="space-between" 
+            justifyContent="space-between"
             alignItems="center"
             shadow="sm"
             transition="all 0.2s"
@@ -84,7 +84,7 @@ const Track: React.FC = () => {
                 <Text fontWeight="bold" fontSize="lg" lineClamp={1}>{latestTrack.title}</Text>
                 {latestTrack.artist && <Text fontSize="sm" color="gray.500" lineClamp={1}>{latestTrack.artist}</Text>}
             </VStack>
-            
+
             <Button onClick={handlePlay} colorScheme="blue" width="full">
                 Play Newest Release
             </Button>

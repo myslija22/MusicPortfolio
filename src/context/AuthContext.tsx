@@ -38,14 +38,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const updateAuth = async (newSession: Session | null) => {
       setSession(newSession);
       setUser(newSession?.user ?? null);
-      
+
       if (newSession?.user) {
         const userRole = await getRole(newSession.user.id);
         setRole(userRole);
       } else {
         setRole(null);
       }
-      
+
       setLoading(false);
     };
 
@@ -66,17 +66,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (currentSession?.access_token !== session?.access_token) {
           updateAuth(currentSession);
         }
-    });
+      });
 
     return () => {
       subscription.unsubscribe();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <AuthContext.Provider value={{ user, session, role, loading }}>
-      {!loading && children} 
+      {!loading && children}
     </AuthContext.Provider>
   );
 };

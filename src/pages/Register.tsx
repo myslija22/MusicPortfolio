@@ -50,8 +50,8 @@ export default function Register() {
     })
 
     return (
-        <Flex 
-            align="center" 
+        <Flex
+            align="center"
             justify="center"
             p="4"
             direction="column"
@@ -59,20 +59,20 @@ export default function Register() {
             <Heading>Register</Heading>
             <form onSubmit={onSubmit} style={{ width: "100%", maxWidth: "400px" }}>
                 <Stack gap="4" align="stretch">
-                    
+
                     <Field.Root invalid={!!errors.email}>
                         <Field.Label>E-mail</Field.Label>
-                        <Input 
-                        {...register("email", { required: "Email is required" })} 
-                        type="email" 
+                        <Input
+                            {...register("email", { required: "Email is required" })}
+                            type="email"
                         />
                         <Field.ErrorText>{errors.email?.message}</Field.ErrorText>
                     </Field.Root>
 
                     <Field.Root invalid={!!errors.password}>
                         <Field.Label>Password</Field.Label>
-                        <PasswordInput 
-                        {...register("password", { required: "Password is required" })} 
+                        <PasswordInput
+                            {...register("password", { required: "Password is required" })}
                         />
                         <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
                     </Field.Root>
@@ -83,6 +83,6 @@ export default function Register() {
                 </Stack>
             </form>
         </Flex>
-        
+
     )
 }

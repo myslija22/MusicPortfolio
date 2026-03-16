@@ -38,7 +38,7 @@ export default function Login() {
         title: "Login Failed",
         description: error.message,
         type: "error",
-    });
+      });
     } else {
       console.log("Logged in successfully!", authData)
       toaster.create({
@@ -49,20 +49,20 @@ export default function Login() {
       navigate(from, { replace: true })
 
     }
-    
+
     setIsLoading(false)
   })
 
   return (
-    <Flex 
-      align="center" 
+    <Flex
+      align="center"
       justify="center"
       p="4"
       direction="column"
     >
       <Heading>Login</Heading>
       <form onSubmit={onSubmit} style={{ width: "100%", maxWidth: "400px" }}>
-        <Stack gap="4" align="stretch"> 
+        <Stack gap="4" align="stretch">
           {authError && (
             <Alert.Root status="error" variant="subtle">
               <Alert.Indicator />
@@ -72,20 +72,20 @@ export default function Login() {
               </Alert.Content>
             </Alert.Root>
           )}
-          
+
           <Field.Root invalid={!!errors.email}>
             <Field.Label>E-mail</Field.Label>
-            <Input 
-              {...register("email", { required: "Email is required" })} 
-              type="email" 
+            <Input
+              {...register("email", { required: "Email is required" })}
+              type="email"
             />
             <Field.ErrorText>{errors.email?.message}</Field.ErrorText>
           </Field.Root>
 
           <Field.Root invalid={!!errors.password}>
             <Field.Label>Password</Field.Label>
-            <PasswordInput 
-              {...register("password", { required: "Password is required" })} 
+            <PasswordInput
+              {...register("password", { required: "Password is required" })}
             />
             <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
           </Field.Root>

@@ -8,7 +8,7 @@ const Downloads: React.FC = () => {
       <Heading mb={8} textAlign="center">
         Demos
       </Heading>
-      
+
       <Tracks isExclusive={false} />
     </Box>
   );

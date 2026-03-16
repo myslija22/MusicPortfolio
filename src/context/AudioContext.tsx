@@ -27,12 +27,12 @@ export const AudioProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
     return (
         <AudioContext.Provider value={{ currentTrack, playTrack, stopTrack }}>
-        {children}
+            {children}
         </AudioContext.Provider>
     );
-    };
+};
 
-    export const useAudio = () => {
+export const useAudio = () => {
     const context = useContext(AudioContext);
     if (context === undefined) {
         throw new Error('useAudio must be used within an AudioProvider');

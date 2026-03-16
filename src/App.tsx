@@ -15,7 +15,7 @@ import { Toaster } from './components/ui/toaster.tsx';
 
 const ContentWrapper = () => {
   const { currentTrack } = useAudio();
-  
+
   return (
     <Box pb={currentTrack ? "120px" : "0"} transition="padding-bottom 0.3s ease">
       <Routes>
@@ -41,10 +41,10 @@ const ContentWrapper = () => {
 const App: React.FC = () => {
   return (
     <AudioProvider>
-      <Navbar /> 
-      
+      <Navbar />
+
       <ContentWrapper />
-      
+
       <AudioPlayer />
       <Toaster />
     </AudioProvider>

@@ -17,31 +17,31 @@ const AudioPlayer: React.FC = () => {
             width="100%"
             zIndex={1000}
             boxShadow="0 -2px 10px rgba(0,0,0,0.1)"
-            bg="black" 
+            bg="black"
             _dark={{ bg: "black" }}
             css={{ //gemini.google.com
-                
+
                 '& .rhap_container': {
-                    backgroundColor: 'transparent', 
+                    backgroundColor: 'transparent',
                     boxShadow: 'none',
                 },
-                
+
                 '& .rhap_time': {
                     color: 'gray.100',
                     fontFamily: 'inherit',
                 },
-                
+
                 '& .rhap_button-clear svg': {
                     fill: 'white',
                     _hover: { fill: 'gray.400' }
                 },
 
                 '& .rhap_progress-bar, & .rhap_volume-bar': {
-                    backgroundColor: 'gray.500', 
+                    backgroundColor: 'gray.500',
                 },
 
                 '& .rhap_progress-filled, & .rhap_volume-filled': {
-                    backgroundColor: 'gray.100', 
+                    backgroundColor: 'gray.100',
                 },
 
                 '& .rhap_progress-indicator, & .rhap_volume-indicator': {
@@ -51,15 +51,15 @@ const AudioPlayer: React.FC = () => {
 
                 '& .rhap_play-status--paused .rhap_progress-indicator': {
                     backgroundColor: 'gray.100',
-                }, 
-                
+                },
+
             }}
         >
             {currentTrack.title && (
-                <Box 
-                    px={4} 
-                    py={2} 
-                    fontSize="sm" 
+                <Box
+                    px={4}
+                    py={2}
+                    fontSize="sm"
                     fontWeight="bold"
                     borderBottom="1px solid"
                     borderColor="whiteAlpha.200"

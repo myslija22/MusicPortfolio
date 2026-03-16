@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { 
     Box, 
     Container, 
@@ -20,7 +20,6 @@ import {
     NativeSelect
 } from '@chakra-ui/react';
 import { supabase } from '../lib/supabase';
-import { useAuth } from '../context/AuthContext';
 import { LuUpload } from 'react-icons/lu';
 import { HiX, HiChevronDown, HiChevronUp, HiTrash } from 'react-icons/hi';
 import { toaster } from '../components/ui/toaster';
@@ -39,7 +38,6 @@ interface TrackData {
 }
 
 export default function Admin() {
-    const { user } = useAuth();
     const [profiles, setProfiles] = useState<ProfileData[]>([]);
     const [tracks, setTracks] = useState<TrackData[]>([]);
     const [loading, setLoading] = useState(true);

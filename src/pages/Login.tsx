@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Alert, Button, Field, Input, Stack, Flex, Heading } from "@chakra-ui/react"
 import { PasswordInput } from "@/components/ui/password-input"
-import { Toaster, toaster } from "@/components/ui/toaster"
+import { toaster } from "@/components/ui/toaster"
 import { useForm } from "react-hook-form"
 import { supabase } from "@/lib/supabase"
 import { useLocation, useNavigate } from "react-router-dom"

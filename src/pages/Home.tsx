@@ -4,7 +4,6 @@ import {
     Heading, 
     Text, 
     VStack, 
-    Separator, 
     Link 
 } from '@chakra-ui/react';
 

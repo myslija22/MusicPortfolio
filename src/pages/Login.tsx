@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Alert, Button, Field, Input, Stack, Flex, Heading } from "@chakra-ui/react"
 import { PasswordInput } from "@/components/ui/password-input"
+import { Toaster, toaster } from "@/components/ui/toaster"
 import { useForm } from "react-hook-form"
 import { supabase } from "@/lib/supabase"
 import { useLocation, useNavigate } from "react-router-dom"
@@ -33,8 +34,18 @@ export default function Login() {
 
     if (error) {
       setAuthError(error.message)
+      toaster.create({
+        title: "Login Failed",
+        description: error.message,
+        type: "error",
+    });
     } else {
       console.log("Logged in successfully!", authData)
+      toaster.create({
+        title: "Login Successful",
+        description: "You have been logged in successfully.",
+        type: "success",
+      });
       navigate(from, { replace: true })
 
     }

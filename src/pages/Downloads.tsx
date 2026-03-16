@@ -1,17 +1,15 @@
 import React from 'react';
 import { Box, Heading } from '@chakra-ui/react';
-import Track from '../components/audio/Track';
+import Tracks from '../components/audio/Tracks';
 
 const Downloads: React.FC = () => {
   return (
-    <Box p={8}>
-      <Heading mb={6} textAlign="center">
-        Download Library
+    <Box py={10} px={5} maxW="container.xl" mx="auto">
+      <Heading mb={8} textAlign="center">
+        Demos
       </Heading>
       
-      <Box maxW="800px" mx="auto">
-        <Track />
-      </Box>
+      <Tracks isExclusive={false} />
     </Box>
   );
 };

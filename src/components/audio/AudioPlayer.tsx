@@ -10,7 +10,7 @@ const AudioPlayer: React.FC = () => {
     if (!currentTrack) return null;
 
     return (
-                <Box
+        <Box
             position="fixed"
             bottom="0"
             left="0"

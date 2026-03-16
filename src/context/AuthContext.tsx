@@ -1,3 +1,4 @@
+//gemini.google.com
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import type { User, Session } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
@@ -16,76 +17,66 @@ const AuthContext = createContext<AuthContextType>({
   loading: true,
 });
 
-//https://www.thecandidstartup.org/2024/07/15/bootstrapping-eslint.html
-// eslint-disable-next-line react-refresh/only-export-components 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [role, setRole] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
 
-  // Added try-catch and logging to see why it fails
-  const fetchRole = async (userId: string) => {
-    try {
-      const { data, error } = await supabase
+  useEffect(() => {
+    const getRole = async (userId: string) => {
+      const { data } = await supabase
         .from('profiles')
         .select('role')
         .eq('id', userId)
         .single();
-      
-      if (error) {
-        console.error("Error fetching role:", error.message);
-      }
-      
-      setRole(data?.role || 'user');
-    } catch (err) {
-      console.error("Unexpected error fetching role:", err);
-      setRole('user'); 
-    }
-  };
+      return data?.role || 'user';
+    };
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session }, error }) => {
-        if (error) {
-            console.error("Error getting session:", error.message);
-            setLoading(false);
-            return;
-        }
-      setSession(session);
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        fetchRole(session.user.id).finally(() => setLoading(false));
+    const updateAuth = async (newSession: Session | null) => {
+      setSession(newSession);
+      setUser(newSession?.user ?? null);
+      
+      if (newSession?.user) {
+        const userRole = await getRole(newSession.user.id);
+        setRole(userRole);
       } else {
-        setLoading(false); // Guarantee we stop loading if there is no user
+        setRole(null);
       }
+      
+      setLoading(false);
+    };
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      updateAuth(session);
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (_event, currentSession) => {  // _event to suppress unused variable warning
-        setSession(currentSession);
-        setUser(currentSession?.user ?? null);
-        
-        if (currentSession?.user) {
-          await fetchRole(currentSession.user.id);
-        } else {
+      async (event, currentSession) => {
+        if (event === 'SIGNED_OUT') {
+          setSession(null);
+          setUser(null);
           setRole(null);
+          setLoading(false);
+          return;
         }
-        setLoading(false);
-      }
-    );
+
+        if (currentSession?.access_token !== session?.access_token) {
+          updateAuth(currentSession);
+        }
+    });
 
     return () => {
       subscription.unsubscribe();
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <AuthContext.Provider value={{ user, session, role, loading }}>
-      {children} 
+      {!loading && children} 
     </AuthContext.Provider>
   );
 };

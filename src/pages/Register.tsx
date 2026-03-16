@@ -1,10 +1,10 @@
 import { useState } from "react"
-import { Alert, Button, Field, Flex, Heading, Input, Stack } from "@chakra-ui/react"
+import { Button, Field, Flex, Heading, Input, Stack } from "@chakra-ui/react"
 import { PasswordInput } from "@/components/ui/password-input"
 import { useForm } from "react-hook-form"
 import { supabase } from "@/lib/supabase"
 import { useLocation, useNavigate } from "react-router-dom"
-
+import { toaster } from "@/components/ui/toaster"
 
 interface FormValues {
     email: string
@@ -13,8 +13,6 @@ interface FormValues {
 
 export default function Register() {
     const [isLoading, setIsLoading] = useState(false)
-    const [authError, setAuthError] = useState<string | null>(null)
-    const [authSuccess, setAuthSuccess] = useState<string | null>(null)
     const { register, handleSubmit, formState: { errors } } = useForm<FormValues>()
 
     const navigate = useNavigate()
@@ -22,27 +20,33 @@ export default function Register() {
 
     const from = location.state?.from?.pathname || "/"
 
-
     const onSubmit = handleSubmit(async (data) => {
-    setIsLoading(true)
-    setAuthError(null)
+        setIsLoading(true)
 
-    const { error, data: authData } = await supabase.auth.signUp({
-        email: data.email,
-        password: data.password,
-    })
+        const { error, data: authData } = await supabase.auth.signUp({
+            email: data.email,
+            password: data.password,
+        })
 
-    if (error) {
-        setAuthError(error.message)
-    } else {
-        console.log("Signed up successfully!", authData)
-        setAuthSuccess("Registration successful! Please check your email to confirm your account.")
-        setTimeout(() => {
-        navigate(from, { replace: true })
-        }, 3000)
-    }
+        if (error) {
+            toaster.create({
+                title: "Signup Failed",
+                description: error.message,
+                type: "error",
+            })
+        } else {
+            console.log("Signed up successfully!", authData)
+            toaster.create({
+                title: "Signed up successfully!",
+                description: "Please check your email to confirm your account.",
+                type: "success",
+            })
+            setTimeout(() => {
+                navigate(from, { replace: true })
+            }, 3000)
+        }
 
-    setIsLoading(false)
+        setIsLoading(false)
     })
 
     return (
@@ -55,25 +59,6 @@ export default function Register() {
             <Heading>Register</Heading>
             <form onSubmit={onSubmit} style={{ width: "100%", maxWidth: "400px" }}>
                 <Stack gap="4" align="stretch">
-                    {authError && (
-                        <Alert.Root status="error" variant="subtle">
-                        <Alert.Indicator />
-                        <Alert.Content>
-                            <Alert.Title>Authentication Failed</Alert.Title>
-                            <Alert.Description>{authError}</Alert.Description>
-                        </Alert.Content>
-                        </Alert.Root>
-                            )}
-                            
-                    {authSuccess && (
-                        <Alert.Root status="success" variant="subtle">
-                        <Alert.Indicator />
-                        <Alert.Content>
-                            <Alert.Title>Success</Alert.Title>
-                            <Alert.Description>{authSuccess}</Alert.Description>
-                        </Alert.Content>
-                        </Alert.Root>
-                    )}
                     
                     <Field.Root invalid={!!errors.email}>
                         <Field.Label>E-mail</Field.Label>

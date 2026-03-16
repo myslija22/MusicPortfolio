@@ -11,7 +11,7 @@ const rootElement = document.getElementById('root')!;
 
 ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
-    <BrowserRouter basename="/musicportfolio">
+    <BrowserRouter basename="/MusicPortfolio">
       <Provider>
         <AuthProvider>
           <App />

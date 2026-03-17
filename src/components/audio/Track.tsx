@@ -75,10 +75,11 @@ const Track: React.FC = () => {
             shadow="sm"
             transition="all 0.2s"
             _hover={{ shadow: 'md', transform: 'translateY(-2px)' }}
-            _dark={{ borderColor: "whiteAlpha.300", bg: "gray.950" }}
+            _dark={{ borderColor: "whiteAlpha.300", bg: "transparent" }}
             minH="150px"
             maxW="md"
             mx="auto"
+            borderColor="whiteAlpha.300"
         >
             <VStack gap={1} mb={4} textAlign="center">
                 <Text fontWeight="bold" fontSize="lg" lineClamp={1}>{latestTrack.title}</Text>

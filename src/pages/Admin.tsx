@@ -191,7 +191,7 @@ export default function Admin() {
         </Box>
 
         <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
-          <Card.Root>
+          <Card.Root background={'transparent'} borderColor="whiteAlpha.300">
             <Card.Body>
               <VStack align="start" gap={1}>
                 <Text fontSize="sm" color="gray.500" textTransform="uppercase" fontWeight="bold">Total Users</Text>
@@ -200,7 +200,7 @@ export default function Admin() {
             </Card.Body>
           </Card.Root>
 
-          <Card.Root>
+          <Card.Root background={'transparent'} borderColor="whiteAlpha.300">
             <Card.Body>
               <VStack align="start" gap={1}>
                 <Text fontSize="sm" color="gray.500" textTransform="uppercase" fontWeight="bold">Total Tracks</Text>
@@ -213,7 +213,7 @@ export default function Admin() {
         <Separator />
 
         <Collapsible.Root open={usersOpen} onOpenChange={(e) => setUsersOpen(e.open)}>
-          <Box borderWidth="1px" borderRadius="lg" p={5} shadow="sm" >
+          <Box borderWidth="1px" borderRadius="lg" p={5} borderColor="whiteAlpha.300" >
             <Collapsible.Trigger asChild>
               <Button width="full" variant="ghost" justifyContent="space-between" size="lg" px={0} _hover={{ bg: 'transparent' }}>
                 <Heading size="md">All Users ({profiles.length})</Heading>
@@ -269,7 +269,7 @@ export default function Admin() {
         </Collapsible.Root>
 
         <Collapsible.Root open={tracksOpen} onOpenChange={(e) => setTracksOpen(e.open)}>
-          <Box borderWidth="1px" borderRadius="lg" p={5} shadow="sm">
+          <Box borderWidth="1px" borderRadius="lg" p={5} borderColor="whiteAlpha.300">
             <Collapsible.Trigger asChild>
               <Button width="full" variant="ghost" justifyContent="space-between" size="lg" px={0} _hover={{ bg: 'transparent' }}>
                 <Heading size="md">All Tracks ({tracks.length})</Heading>
@@ -319,7 +319,7 @@ export default function Admin() {
           <Heading as="h1" size="xl" mb={4}>Upload A New Track</Heading>
 
           <FileUpload.Root maxW="full" alignItems="stretch" maxFiles={10} accept={['audio/*']} onFileChange={handleFileChange}>
-            <FileUpload.Dropzone>
+            <FileUpload.Dropzone background={'transparent'} borderColor="whiteAlpha.300" >
               <FileUpload.HiddenInput />
               <Icon size="md" color="fg.muted"><LuUpload /></Icon>
               <FileUpload.DropzoneContent><Box>Drag and drop audio files here</Box></FileUpload.DropzoneContent>

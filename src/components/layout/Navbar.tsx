@@ -10,7 +10,7 @@ const NavLink = ({ href, children }: { href: string; children: React.ReactNode }
     const isActive = pathname === href
 
     return (    //gemini.google.com
-        <ChakraLink asChild _currentPage={{ color: "blue.500", fontWeight: "bold" }}>
+        <ChakraLink asChild _currentPage={{ color: "blue.400", fontWeight: "bold" }}>
             <RouterLink
                 to={href}
                 aria-current={isActive ? "page" : undefined}
@@ -46,7 +46,23 @@ export default function Navbar() {
     }
 
     return (
-        <Box backdropFilter='auto' backdropBlur='100px' top={'0'} position={'fixed'} w={'full'} zIndex={50}>
+        <Box top={'0'} position={'fixed'} w={'full'} zIndex={50}>
+            <Box
+                position="absolute"
+                top={0}
+                left={0}
+                w="full"
+                h="32"
+                backdropFilter="auto"
+                backdropBlur="20px"
+                zIndex={-1}
+                pointerEvents="none"
+                style={{
+                    WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%)',
+                    maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%)'
+                }}
+            >
+            </Box>
             <Stack direction="row" h="20" alignItems="center" justifyContent="space-between" px="10" pos={'sticky'}>
                 <NavLink href="/">Home</NavLink>
                 <NavLink href="/downloads">Demos</NavLink>

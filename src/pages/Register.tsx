@@ -65,6 +65,7 @@ export default function Register() {
                         <Input
                             {...register("email", { required: "Email is required" })}
                             type="email"
+                            borderColor={'gray.500'}
                         />
                         <Field.ErrorText>{errors.email?.message}</Field.ErrorText>
                     </Field.Root>
@@ -73,6 +74,7 @@ export default function Register() {
                         <Field.Label>Password</Field.Label>
                         <PasswordInput
                             {...register("password", { required: "Password is required" })}
+                            borderColor={'gray.500'}
                         />
                         <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
                     </Field.Root>

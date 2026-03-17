@@ -95,9 +95,10 @@ const Tracks: React.FC<TracksProps> = ({ isExclusive = false }) => {
                             shadow="sm"
                             transition="all 0.2s"
                             _hover={{ shadow: 'md', transform: 'translateY(-2px)' }}
-                            _dark={{ borderColor: "whiteAlpha.300", bg: "gray.950" }}
+                            _dark={{ borderColor: "whiteAlpha.300", bg: "gray.transparent" }}
                             minH="150px"
                             position="relative" 
+                            borderColor="whiteAlpha.300"
                         >
                             {isExclusive && (
                                 <Box

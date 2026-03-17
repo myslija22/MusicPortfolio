@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Button, Text, SimpleGrid, Spinner, VStack, Grid, GridItem } from '@chakra-ui/react';
-// Assuming you have LuDownload from react-icons; if not, you can use any icon or text
 import { LuDownload } from 'react-icons/lu';
 import { useAudio } from '../../context/AudioContext';
 import { supabase } from '../../lib/supabase';
@@ -55,21 +54,18 @@ const Tracks: React.FC<TracksProps> = ({ isExclusive = false }) => {
     };
 
     const handleDownload = (track: TrackData) => {
-        // Create a clean filename
         const extension = track.file_path.split('.').pop() || 'mp3';
         const filename = `${track.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.${extension}`;
 
-        // Pass download: true (or the filename) to tell Supabase to set headers for downloading
         const { data } = supabase.storage
             .from('audio_files')
             .getPublicUrl(track.file_path, { download: filename });
 
         if (data?.publicUrl) {
-            // Create a temporary link and click it to trigger native browser download instantly
             const a = document.createElement('a');
             a.style.display = 'none';
             a.href = data.publicUrl;
-            a.download = filename; // Note: for cross-origin URLs, the server's content-disposition header (set by Supabase above) dictates the filename
+            a.download = filename; 
 
             document.body.appendChild(a);
             a.click();
@@ -96,13 +92,12 @@ const Tracks: React.FC<TracksProps> = ({ isExclusive = false }) => {
                             display="flex"
                             flexDirection="column"
                             justifyContent="space-between"
-                            //alignItems="center"
                             shadow="sm"
                             transition="all 0.2s"
                             _hover={{ shadow: 'md', transform: 'translateY(-2px)' }}
                             _dark={{ borderColor: "whiteAlpha.300", bg: "gray.950" }}
                             minH="150px"
-                            position="relative" // Required for absolute positioning of VIP badge
+                            position="relative" 
                         >
                             {isExclusive && (
                                 <Box

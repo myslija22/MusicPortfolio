@@ -12,6 +12,7 @@ import Register from './pages/Register.tsx';
 import { AudioProvider, useAudio } from './context/AudioContext.tsx'; // Add useAudio import
 import AudioPlayer from './components/audio/AudioPlayer.tsx';
 import { Toaster } from './components/ui/toaster.tsx';
+import Background from './components/layout/Background.tsx';
 
 const ContentWrapper = () => {
   const { currentTrack } = useAudio();
@@ -41,6 +42,8 @@ const ContentWrapper = () => {
 const App: React.FC = () => {
   return (
     <AudioProvider>
+      <Background />
+
       <Navbar />
 
       <ContentWrapper />

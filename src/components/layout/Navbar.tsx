@@ -1,4 +1,4 @@
-import { Stack, Link as ChakraLink, Button } from "@chakra-ui/react"
+import { Stack, Link as ChakraLink, Button, Box } from "@chakra-ui/react"
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom"
 import { useAuth } from "../../context/AuthContext"
 import { supabase } from "../../lib/supabase"
@@ -46,23 +46,25 @@ export default function Navbar() {
     }
 
     return (
-        <Stack direction="row" h="20" alignItems="center" justifyContent="space-between" px="10" pos={'sticky'}>
-            <NavLink href="/">Home</NavLink>
-            <NavLink href="/downloads">Demos</NavLink>
+        <Box backdropFilter='auto' backdropBlur='100px' position={'fixed'} w={'full'} zIndex={50}>
+            <Stack direction="row" h="20" alignItems="center" justifyContent="space-between" px="10" pos={'sticky'}>
+                <NavLink href="/">Home</NavLink>
+                <NavLink href="/downloads">Demos</NavLink>
 
-            {user && (role === "admin" || role === "vip") && <NavLink href="/exclusive">VIP</NavLink>}
-            {user && role === "admin" && <NavLink href="/admin">Dashboard</NavLink>}
+                {user && (role === "admin" || role === "vip") && <NavLink href="/exclusive">VIP</NavLink>}
+                {user && role === "admin" && <NavLink href="/admin">Dashboard</NavLink>}
 
-            {!user ? (
-                <>
-                    <NavLink href="/login">Login</NavLink>
-                    <NavLink href="/register">Register</NavLink>
-                </>
-            ) : (
-                <Button onClick={handleLogout} variant="ghost" colorScheme="blue" margin={'unset'} padding={'unset'}>
-                    Sign Out
-                </Button>
-            )}
-        </Stack>
+                {!user ? (
+                    <>
+                        <NavLink href="/login">Login</NavLink>
+                        <NavLink href="/register">Register</NavLink>
+                    </>
+                ) : (
+                    <Button onClick={handleLogout} variant="ghost" colorScheme="blue" margin={'unset'} padding={'unset'}>
+                        Sign Out
+                    </Button>
+                )}
+            </Stack>
+        </Box>
     )
 }

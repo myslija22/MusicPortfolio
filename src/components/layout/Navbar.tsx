@@ -46,7 +46,7 @@ export default function Navbar() {
     }
 
     return (
-        <Box backdropFilter='auto' backdropBlur='100px' position={'fixed'} w={'full'} zIndex={50}>
+        <Box backdropFilter='auto' backdropBlur='100px' top={'0'} position={'fixed'} w={'full'} zIndex={50}>
             <Stack direction="row" h="20" alignItems="center" justifyContent="space-between" px="10" pos={'sticky'}>
                 <NavLink href="/">Home</NavLink>
                 <NavLink href="/downloads">Demos</NavLink>

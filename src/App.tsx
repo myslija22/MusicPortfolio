@@ -43,7 +43,7 @@ const App: React.FC = () => {
   return (
     <AudioProvider>
       <Background />
-
+      <Box h="20" w="full" />
       <Navbar />
 
       <ContentWrapper />

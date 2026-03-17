@@ -18,7 +18,7 @@ const ContentWrapper = () => {
   const { currentTrack } = useAudio();
 
   return (
-    <Box pb={currentTrack ? "120px" : "0"} transition="padding-bottom 0.3s ease">
+    <Box pt="20" pb={currentTrack ? "120px" : "0"} transition="padding-bottom 0.3s ease">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/downloads" element={<Downloads />} />
@@ -43,7 +43,6 @@ const App: React.FC = () => {
   return (
     <AudioProvider>
       <Background />
-      <Box h="20" w="full" />
       <Navbar />
 
       <ContentWrapper />
